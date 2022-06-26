@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - Le bon coin{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            {% for annonce in annonces %}
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="card m-3" style="width: 18rem;">
+                        <img src="https://bulma.io/images/placeholders/480x320.png" class="card-img-top" alt="480x320">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ annonce.title }}</h4>
+                            <h5 class="font-weight-bold">{{ annonce.price }} €</h5>
+                            <p class="card-text text-truncate">{{ annonce.description }}</p>
+                            <p class="card-text">Categorie : {{ annonce.categorie.title }}</p>
+                            <a href="{{ path('app_annonce', { 'id': annonce.id }) }}" class="btn btn-primary">En savoir plus</a>
+                            {% if app.user %}
+                                <a href="{{ path('app_update_annonce', { 'id': annonce.id }) }}" class="btn btn-info">Modifier</a>
+                                <a href="{{ path('app_delete_annonce', { 'id': annonce.id }) }}" class="btn btn-danger mt-3">Supprimer</a>
+                            {% endif %}
+                        </div>
+                        <div class="card-footer text-muted">
+                            {{ annonce.createdAt|date("d/m/Y \\à h:i:s") }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

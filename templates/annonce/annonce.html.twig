@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ annonce.title }} - Le bon coin{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>{{ annonce.title }}</h1>
+        <h3>{{ annonce.price }} €</h3>
+        <p>{{ annonce.description }}</p>
+        <p>Date de publication : {{ annonce.createdAt|date("d/m/Y \\à h:i:s") }}</p>
+        <p>Date de modification : {{ annonce.updatedAt|date("d/m/Y \\à h:i:s") }}</p>
+        <p>Autheur : {{ annonce.user.email }}</p>
+        <p>Categorie : {{ annonce.categorie.title }}</p>
+        {{ dump(annonce) }}
+    </div>
+{% endblock %}
